@@ -1,0 +1,14 @@
+{% extends 'orders/base.html' %}
+{% block content %}
+<div class="form-card" style="max-width:400px;margin:auto;">
+  <h2>Регистрация</h2>
+  <form method="post" novalidate>{% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }} {% if form.username.errors %}<p style="color:red;">{{ form.username.errors.0 }}</p>{% endif %}
+    {{ form.email.label_tag }} {{ form.email }} {% if form.email.errors %}<p style="color:red;">{{ form.email.errors.0 }}</p>{% endif %}
+    {{ form.telegram_username.label_tag }} {{ form.telegram_username }} {% if form.telegram_username.errors %}<p style="color:red;">{{ form.telegram_username.errors.0 }}</p>{% endif %}
+    {{ form.password1.label_tag }} {{ form.password1 }} {% if form.password1.errors %}<p style="color:red;">{{ form.password1.errors.0 }}</p>{% endif %}
+    {{ form.password2.label_tag }} {{ form.password2 }} {% if form.password2.errors %}<p style="color:red;">{{ form.password2.errors.0 }}</p>{% endif %}
+    <button type="submit" class="btn" style="width:100%;">Зарегистрироваться</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'orders/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="hero mb-8">
+  <h1 class="text-5xl font-extrabold mb-4">Хочешь сделать что-то с помощью ИИ, но не можешь?</h1>
+  <p class="text-2xl mb-6">Заказывай у нас!</p>
+  {% if not user.is_authenticated %}
+    <a href="{% url 'orders:register' %}" class="btn mr-4">Регистрация</a>
+    <a href="{% url 'orders:login' %}" class="btn">Вход</a>
+  {% else %}
+    <a href="{% url 'orders:create_order' %}" class="btn">Создать заказ</a>
+  {% endif %}
+</div>
+<div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+  <div class="form-card text-center">
+    <img src="{% static 'orders/images/images.jpeg' %}" alt="Генерация изображений" style="width:100%;height:150px;object-fit:cover;border-radius:0.5rem;">
+    <h3>Генерация изображений</h3>
+  </div>
+  <div class="form-card text-center">
+    <video style="width:100%;height:150px;object-fit:cover;border-radius:0.5rem;" autoplay loop muted>
+      <source src="{% static 'orders/videos/video.mp4' %}" type="video/mp4">
+    </video>
+    <h3>Генерация видео</h3>
+  </div>
+  <div class="form-card text-center">
+    <img src="{% static 'orders/images/Без названия.jpeg' %}" alt="AI-пример" style="width:100%;height:150px;object-fit:cover;border-radius:0.5rem;">
+    <h3>AI-пример</h3>
+  </div>
+  <div class="form-card text-center">
+    <img src="{% static 'orders/images/images (1).jpeg' %}" alt="Генерация музыки" style="width:100%;height:150px;object-fit:cover;border-radius:0.5rem;">
+    <h3>Генерация музыки</h3>
+    <audio controls style="width:100%;margin-top:0.5rem;">
+      <source src="{% static 'orders/audio/Наш_трек.mp3' %}" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+{% endblock %}

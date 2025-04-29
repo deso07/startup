@@ -1,0 +1,11 @@
+{% extends 'orders/base.html' %}
+{% block content %}
+<div class="form-card" style="max-width:400px;margin:auto;">
+  <h2>Вход</h2>
+  <form method="post">{% csrf_token %}
+    <label>Логин{{ form.username }}</label><br>
+    <label>Пароль<input type="password" name="password" class="form-control"/></label><br>
+    <button type="submit" class="btn" style="width:100%;">Войти</button>
+  </form>
+</div>
+{% endblock %}

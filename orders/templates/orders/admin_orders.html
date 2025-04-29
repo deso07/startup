@@ -1,0 +1,23 @@
+{% extends 'orders/base.html' %}
+{% block content %}
+<h2>Админ: все заказы</h2>
+<form method="post">{% csrf_token %}
+<table>
+<tr><th>#</th><th>Имя</th><th>Статус</th><th>Действия</th></tr>
+{% for o in orders %}
+<tr>
+  <td>{{ o.id }}</td>
+  <td>{{ o.name }}</td>
+  <td>{{ o.get_status_display }}</td>
+  <td>
+    <input type="hidden" name="order_id" value="{{ o.id }}">
+    <select name="status">
+      {% for val, lbl in o.STATUS_CHOICES %}<option value="{{ val }}" {% if o.status==val %}selected{% endif %}>{{ lbl }}</option>{% endfor %}
+    </select>
+    <button type="submit" class="btn">Сохранить</button>
+  </td>
+</tr>
+{% endfor %}
+</table>
+</form>
+{% endblock %}
