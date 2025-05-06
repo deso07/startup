@@ -1,34 +1,40 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.csrf import csrf_protect
 from .forms import RegisterForm, OrderForm
 from .models import Order
-from .utils import send_telegram_message
-from django.contrib.auth.decorators import login_required, user_passes_test
+from orders.utils import send_telegram_message
+from .telegram_utils import send_order_notification
+import asyncio
 
 def home(request):
     return render(request, 'orders/home.html')
 
 def register(request):
-    form = RegisterForm(request.POST or None)
-    if form.is_valid():
-        user = form.save()
-        login(request, user)
-        return redirect('orders:create_order')
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Auto-login after registration
+            return redirect('orders:home')  # Redirect to home page
+    else:
+        form = RegisterForm()
     return render(request, 'orders/register.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
-        user = authenticate(request,
-            username=request.POST['username'],
-            password=request.POST['password'])
-        if user:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
             login(request, user)
-            return redirect('orders:create_order')
+            return redirect('orders:home')  # Redirect to home page
     return render(request, 'orders/login.html')
 
 def logout_view(request):
     logout(request)
-    return redirect('orders:home')
+    return redirect('orders:home')  # Redirect to home page after logout
 
 @login_required
 def create_order(request):
@@ -38,6 +44,10 @@ def create_order(request):
             order = form.save(commit=False)
             order.user = request.user
             order.save()
+            
+            # Send Telegram notification
+            asyncio.run(send_order_notification(order))
+            
             return redirect('orders:profile')
     else:
         form = OrderForm()
@@ -79,3 +89,10 @@ def delete_order(request, pk):
         order.delete()
         return redirect('orders:profile')
     return render(request, 'orders/delete_confirm.html', {'order': order})
+
+@csrf_protect
+def your_view(request):
+    if request.method == 'POST':
+        # Здесь должен быть код обработки POST запроса
+        pass  # Если пока нет кода обработки, используйте pass
+    return render(request, 'template.html')

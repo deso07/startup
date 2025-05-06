@@ -1,66 +1,14 @@
 {% extends 'orders/base.html' %}
+
 {% block content %}
-<div class="max-w-lg mx-auto mt-10 form-card">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6">Создать новый заказ</h2>
-  <form method="post" enctype="multipart/form-data" class="space-y-6">
-    {% csrf_token %}
-
-    <div>
-      {{ form.name.label_tag }}<span class="text-red-500">*</span>
-      {{ form.name }}
-      {% if form.name.errors %}
-        <p class="text-red-600 text-sm">{{ form.name.errors.0 }}</p>
-      {% endif %}
+<div class="auth-container">
+    <div class="auth-form order-form">
+        <h2>Создать заказ</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Создать заказ</button>
+        </form>
     </div>
-
-    <div>
-      <label for="{{ form.telegram.id_for_label }}" class="block text-gray-700">
-        Telegram-ник<span class="text-red-500">*</span>
-      </label>
-      {{ form.telegram }}
-      {% if form.telegram.errors %}
-        <p class="text-red-600 text-sm">{{ form.telegram.errors.0 }}</p>
-      {% endif %}
-    </div>
-
-    <div>
-      {{ form.deadline.label_tag }}<span class="text-red-500">*</span>
-      {{ form.deadline }}
-      {% if form.deadline.errors %}
-        <p class="text-red-600 text-sm">{{ form.deadline.errors.0 }}</p>
-      {% endif %}
-    </div>
-
-    <div>
-      {{ form.description.label_tag }}<span class="text-red-500">*</span>
-      {{ form.description }}
-      {% if form.description.errors %}
-        <p class="text-red-600 text-sm">{{ form.description.errors.0 }}</p>
-      {% endif %}
-    </div>
-
-    <div>
-      <label for="{{ form.media.id_for_label }}" class="block text-gray-700">
-        Прикрепить файл
-      </label>
-      {{ form.media }}
-      {% if form.media.errors %}
-        <p class="text-red-600 text-sm">{{ form.media.errors.0 }}</p>
-      {% endif %}
-    </div>
-
-    <button type="submit" class="btn w-full py-3 font-medium">
-      Отправить заказ
-    </button>
-  </form>
 </div>
-
-<!-- Подключаем flatpickr, если ещё не подключено -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
-    flatpickr("input[type=date]", {dateFormat:"Y-m-d"});
-  });
-</script>
 {% endblock %}

@@ -1,12 +1,12 @@
 {% extends 'orders/base.html' %}
 {% block content %}
-<!-- Обёртка с отступами и ограниченной шириной -->
-<div class="max-w-3xl mx-auto px-8 mt-8">
+<div class="container">
   <h2 class="text-2xl font-bold mb-6 text-gray-800">Мои заказы</h2>
   <div class="space-y-6">
     {% for order in orders %}
       <div class="form-card">
-        <p><strong>#{{ order.id }}</strong> {{ order.name }} — {{ order.get_status_display }}</p>
+        <p><strong>#{{ order.id }}</strong> {{ order.name }}</p>
+        <p>Статус: {{ order.get_status_display }}</p>
         <p>Дедлайн: {{ order.deadline }}</p>
         <p>{{ order.description }}</p>
         {% if order.media %}
