@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_8f#z^2l#ncdbyr)uc(1+==ibs#f-lxudcwj31q)dptkyr0a(='
+SECRET_KEY = '1488148814881488'  # Измените на новый секретный ключ
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  # Изменить на False для продакшена
 
-ALLOWED_HOSTS = ['weeu.pythonanywhere.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['weeu.pythonanywhere.com']
 
 
 # Application definition
@@ -116,13 +116,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'orders' / 'static'
-]
+STATIC_ROOT = '/home/weeu/startup/staticfiles'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/home/weeu/startup/media'
 
 AUTH_USER_MODEL = 'orders.User'
 
