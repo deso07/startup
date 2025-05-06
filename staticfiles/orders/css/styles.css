@@ -305,29 +305,29 @@ input[type="date"]::-webkit-clear-button {
   display: none;
 }
 
-::-webkit-datetime-edit { 
+::-webkit-datetime-edit {
   padding: 0;
   color: #374151;
 }
 
-::-webkit-datetime-edit-fields-wrapper { 
+::-webkit-datetime-edit-fields-wrapper {
   background: transparent;
 }
 
-::-webkit-datetime-edit-text { 
+::-webkit-datetime-edit-text {
   color: #6B21A8;
   padding: 0 0.3em;
 }
 
-::-webkit-datetime-edit-month-field { 
+::-webkit-datetime-edit-month-field {
   color: #374151;
 }
 
-::-webkit-datetime-edit-day-field { 
+::-webkit-datetime-edit-day-field {
   color: #374151;
 }
 
-::-webkit-datetime-edit-year-field { 
+::-webkit-datetime-edit-year-field {
   color: #374151;
 }
 
@@ -375,4 +375,20 @@ input[type="date"]::-webkit-clear-button {
     padding-left: max(var(--container-padding), env(safe-area-inset-left));
     padding-right: max(var(--container-padding), env(safe-area-inset-right));
   }
+}
+
+/* Стили для кастомизации виджета SendPulse */
+#pulse-live-chat {
+    max-width: 360px !important;
+    height: 600px !important;
+    max-height: 90vh !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+    right: 20px !important;
+    bottom: 20px !important;
+}
+
+#pulse-live-chat iframe {
+    border-radius: 16px !important;
 }
